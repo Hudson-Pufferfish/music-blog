@@ -1,6 +1,7 @@
 // import { createContext } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { AllPosts } from "./AllPosts";
+// import { AllPosts } from "./AllPosts";
+import AllPosts  from "./AllPosts";
 import "./App.css";
 import MessageBoard from "./MessageBoard";
 import NavBar from "./NavBar";
