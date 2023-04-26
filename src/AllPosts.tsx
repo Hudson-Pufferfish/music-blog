@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "./App";
 import { castVote } from "./cast-vote";
@@ -13,6 +13,7 @@ export function AllPosts() {
   const { session } = useContext(UserContext);
   const { pageNumber } = useParams();
   const [bumper, setBumper] = useState(0);
+  const [sortOption, setSortOption] = useState<'none' | 'created_at' | 'score-low-to-high' | 'score-high-to-low'>('none');
   const [posts, setPosts] = useState<GetPostsResponse[]>([]);
   const [myVotes, setMyVotes] = useState<
     Record<string, "up" | "down" | undefined>
@@ -42,11 +43,30 @@ export function AllPosts() {
         }
       });
   }, [session, bumper, pageNumber]);
-  console.log("🚀 ----------------------------🚀")
-  console.log("🚀 ~ AllPosts ~ posts:", posts)
-  console.log("🚀 ----------------------------🚀")
-  console.log("🚀 ~ AllPosts ~ posts:", posts[0]?.created_at)
-  
+
+  const sortPosts = useCallback(() => {
+    if (sortOption === 'created_at') {
+      return [...posts].sort((a, b) => {
+        const timeAgoA = timeAgo(a.created_at);
+        const timeAgoB = timeAgo(b.created_at);
+        if (timeAgoA < timeAgoB) {
+          return -1;
+        } else if (timeAgoA > timeAgoB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (sortOption === 'score-low-to-high') {
+      return [...posts].sort((a, b) => a.score - b.score);
+    } else if (sortOption === 'score-high-to-low') {
+      return [...posts].sort((a, b) => b.score - a.score);
+    } else {
+      return posts;
+    }
+  }, [posts, sortOption]);
+
+  const sortedPosts = useMemo(() => sortPosts(), [sortPosts]);
 
   return (
     <>
@@ -57,8 +77,19 @@ export function AllPosts() {
           }}
         />
       )}
+      <div className="dropdown-filter">
+        <label className="dropdown-filter--label">
+          Sort posts by:
+        </label>
+          <select value={sortOption} onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-filter--select">
+            <option value="none">None</option>
+            <option value="created_at">Created At</option>
+            <option value="score-low-to-high">Post score: Low to High</option>
+            <option value="score-high-to-low">Post score: High to Low</option>
+          </select>
+      </div>
       <div className="posts-container">
-        {posts?.map((post) => (
+        {sortedPosts?.map((post) => (
           <Post
             key={post.id}
             postData={post}
