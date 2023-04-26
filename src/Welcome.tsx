@@ -19,6 +19,8 @@ export async function welcomeLoader() {
   if (data?.username) {
     return redirect("/");
   }
+
+  return null;
 }
 
 export function Welcome() {
