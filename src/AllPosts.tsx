@@ -42,6 +42,11 @@ export function AllPosts() {
         }
       });
   }, [session, bumper, pageNumber]);
+  console.log("🚀 ----------------------------🚀")
+  console.log("🚀 ~ AllPosts ~ posts:", posts)
+  console.log("🚀 ----------------------------🚀")
+  console.log("🚀 ~ AllPosts ~ posts:", posts[0]?.created_at)
+  
 
   return (
     <>
@@ -67,6 +72,9 @@ export function AllPosts() {
     </>
   );
 }
+
+
+
 
 function Post({
   postData,
