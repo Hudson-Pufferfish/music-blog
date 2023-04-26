@@ -83,7 +83,7 @@ export function AllPosts() {
         </label>
           <select value={sortOption} onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-filter--select">
             <option value="none">None</option>
-            <option value="created_at">Created At</option>
+            <option value="created_at">Newer posts</option>
             <option value="score-low-to-high">Post score: Low to High</option>
             <option value="score-high-to-low">Post score: High to Low</option>
           </select>
