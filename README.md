@@ -35,7 +35,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [x] TypeScript for better type safety
+* [x] TypeScript for better type safety, Playwright for E2E testing
 
 ## Video Walkthrough
 
