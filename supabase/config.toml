@@ -65,8 +65,16 @@ enable_confirmations = false
 enabled = false
 client_id = ""
 secret = ""
+[auth.external.spotify]
+enabled = true
+client_id = "c3ff4bede45e40abac1e40216336d73c"
+secret = "a9d843e3272641dc864d01a280aad6ea"
+[auth.external.google]
+enabled = true
+client_id = "421443723521-37nn96oe10iroidqcjfal73h3eqrr92p.apps.googleusercontent.com"
+secret = "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"
 # Overrides the default auth redirectUrl.
-redirect_uri = ""
+redirect_uri = "https://owmupltyqnsjchqiwxgq.supabase.co/auth/v1/callback"
 # Overrides the default auth provider URL. Used to support self-hosted gitlab, single-tenant Azure,
 # or any other third-party OIDC providers.
 url = ""
