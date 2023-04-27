@@ -1,8 +1,8 @@
-# Web Development Final Project - *Music App Blog*
+# Web Development Final Project - *Supaship Music App Blog*
 
 Submitted by: **Hudson Nguyen**
 
-This web app: **Music App Blog**
+This web app: **Music App Blog - Let's ship Spotify lovers together!**
 
 Time spent: **10** hours spent in total
 
