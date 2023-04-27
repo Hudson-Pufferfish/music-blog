@@ -70,7 +70,7 @@ svg {
 }
 
 .dropdown-filter {
-  @apply relative w-1/5 mb-14;
+  @apply relative w-1/2 md:w-1/4 mb-14;
 }
 
 .dropdown-select {
