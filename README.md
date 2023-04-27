@@ -4,7 +4,7 @@ Submitted by: **Hudson Nguyen**
 
 This web app: **Music App Blog**
 
-Time spent: **5** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
