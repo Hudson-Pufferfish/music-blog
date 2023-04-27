@@ -97,6 +97,7 @@ yarn build
 
 Manual. Run build and then drop `/dist` into Netlify buccket
 (Will automate later)
+I did automate in the end :">>
 
 ### e2e
 
