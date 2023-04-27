@@ -49,18 +49,40 @@ svg {
 }
 
 /* AllPosts component styles */
-.dropdown-filter {
-  @apply relative w-1/4 ml-auto mb-14;
-}
-.dropdown-filter--label {
-  @apply block mb-2 text-lg font-bold text-white;
-}
-.dropdown-filter--select {
-  @apply absolute w-full sm:w-3/4 top-full left-1/2 transform -translate-x-1/2 my-2 text-center bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 placeholder-gray-400;
+.posts-filter {
+  @apply flex flex-col items-center justify-between gap-3;
 }
 
-.dropdown-filter--select > option {
+.posts-filter label {
+  @apply block text-lg font-bold text-white;
+}
+
+.search-form {
+  @apply flex items-center;
+}
+
+.search-filter .search-text {
+  @apply p-2 text-base text-gray-800 rounded-lg;
+}
+
+.search-filter .search-btn {
+  @apply p-2 hover:py-3 mx-2 text-base bg-green-400 rounded-lg font-display transition-all duration-300 hover:bg-green-500 hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)];
+}
+
+.dropdown-filter {
+  @apply relative w-1/5 mb-14;
+}
+
+.dropdown-select {
+  @apply cursor-pointer absolute w-full sm:w-3/4 top-full left-1/2 transform -translate-x-1/2 my-2 text-center bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 placeholder-gray-400;
+}
+
+.dropdown-select > option {
   @apply w-full break-normal md:w-1/4 md:break-all;
+}
+
+.reset-filter {
+  @apply font-display p-2 text-sm bg-red-600 rounded-lg hover:bg-red-500 transition-all duration-300 hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)];
 }
 
 .posts-container {
@@ -89,7 +111,7 @@ svg {
 }
 
 .create-post-submit-button {
-  @apply p-2 text-lg bg-green-400 rounded font-display;
+  @apply p-2 text-lg bg-green-400 rounded font-display transition-all duration-300 hover:bg-green-500 hover:drop-shadow-[0_0_7px_rgba(168,85,247,0.5)];
 }
 
 /* Dialog component styles */

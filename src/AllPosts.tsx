@@ -14,6 +14,8 @@ export function AllPosts() {
   const { pageNumber } = useParams();
   const [bumper, setBumper] = useState(0);
   const [sortOption, setSortOption] = useState<'none' | 'created_at' | 'score-low-to-high' | 'score-high-to-low'>('none');
+  const [searchText, setSearchText] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<GetPostsResponse[]>([]);
   const [myVotes, setMyVotes] = useState<
     Record<string, "up" | "down" | undefined>
@@ -45,8 +47,10 @@ export function AllPosts() {
   }, [session, bumper, pageNumber]);
 
   const sortPosts = useCallback(() => {
+    let sortedPosts = [...posts];
+
     if (sortOption === 'created_at') {
-      return [...posts].sort((a, b) => {
+      sortedPosts = sortedPosts.sort((a, b) => {
         const timeAgoA = timeAgo(a.created_at);
         const timeAgoB = timeAgo(b.created_at);
         if (timeAgoA < timeAgoB) {
@@ -58,15 +62,34 @@ export function AllPosts() {
         }
       });
     } else if (sortOption === 'score-low-to-high') {
-      return [...posts].sort((a, b) => a.score - b.score);
+      sortedPosts = sortedPosts.sort((a, b) => a.score - b.score);
     } else if (sortOption === 'score-high-to-low') {
-      return [...posts].sort((a, b) => b.score - a.score);
-    } else {
-      return posts;
+      sortedPosts = sortedPosts.sort((a, b) => b.score - a.score);
     }
-  }, [posts, sortOption]);
+
+    if (searchQuery !== '') {
+      sortedPosts = sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    }
+
+    return sortedPosts;
+  }, [posts, sortOption, searchQuery]);
 
   const sortedPosts = useMemo(() => sortPosts(), [sortPosts]);
+
+  const handleSearch = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setSearchQuery(searchText);
+      sortPosts();
+    },
+    [searchText]
+  );
+
+  const handleReset = useCallback(() => {
+    setSortOption('none');
+    setSearchText('');
+    setSearchQuery('');
+  }, []);
 
   return (
     <>
@@ -77,16 +100,40 @@ export function AllPosts() {
           }}
         />
       )}
-      <div className="dropdown-filter">
-        <label className="dropdown-filter--label">
-          View by:
-        </label>
-          <select value={sortOption} onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-filter--select">
+      <div className="posts-filter">
+        <div className="search-filter">
+          <form onSubmit={handleSearch} className="search-form">
+            <label>
+            <input
+              type="text"
+              value={searchText}
+              placeholder="Search post by title"
+              onChange={e => setSearchText(e.target.value)}
+              className="search-text"
+              />
+            </label>
+            <button type="submit" className="search-btn">Search</button>
+          </form>
+        </div>
+        <div className="dropdown-filter">
+          <label>View by: </label>
+          <select
+            value={sortOption}
+            onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-select"
+          >
             <option value="none">None</option>
             <option value="created_at">Some newer posts</option>
             <option value="score-low-to-high">Post score: Low to High</option>
             <option value="score-high-to-low">Post score: High to Low</option>
           </select>
+        </div>
+        <button
+          onClick={handleReset}
+          className="reset-filter"
+        >
+          Reset Filters
+        </button>
+        
       </div>
       <div className="posts-container">
         {sortedPosts?.map((post) => (
@@ -98,7 +145,7 @@ export function AllPosts() {
               setBumper(bumper + 1);
             }}
           />
-        ))}
+        )) ?? null}
       </div>
     </>
   );
