@@ -116,16 +116,17 @@ export function AllPosts() {
           </form>
         </div>
         <div className="dropdown-filter">
-          <label>View by: </label>
-          <select
-            value={sortOption}
-            onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-select"
-          >
-            <option value="none">None</option>
-            <option value="created_at">Some newer posts</option>
-            <option value="score-low-to-high">Post score: Low to High</option>
-            <option value="score-high-to-low">Post score: High to Low</option>
-          </select>
+          <label>
+            <select
+              value={sortOption}
+              onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-select"
+              >
+              <option value="none">View posts by</option>
+              <option value="created_at">Some newer posts</option>
+              <option value="score-low-to-high">Post score: Low to High</option>
+              <option value="score-high-to-low">Post score: High to Low</option>
+            </select>
+          </label>
         </div>
         <button
           onClick={handleReset}
