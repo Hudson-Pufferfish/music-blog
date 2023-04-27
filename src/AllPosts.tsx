@@ -79,7 +79,7 @@ export function AllPosts() {
       )}
       <div className="dropdown-filter">
         <label className="dropdown-filter--label">
-          View posts by:
+          View by:
         </label>
           <select value={sortOption} onChange={e => setSortOption(e.target.value as typeof sortOption)} className="dropdown-filter--select">
             <option value="none">None</option>

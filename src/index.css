@@ -50,13 +50,17 @@ svg {
 
 /* AllPosts component styles */
 .dropdown-filter {
-  @apply relative w-1/4 mx-auto mb-14
+  @apply relative w-1/4 ml-auto mb-14;
 }
 .dropdown-filter--label {
   @apply block mb-2 text-lg font-bold text-white;
 }
 .dropdown-filter--select {
-  @apply absolute top-full left-1/2 transform -translate-x-1/2 my-2 text-center bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 placeholder-gray-400;
+  @apply absolute w-full sm:w-3/4 top-full left-1/2 transform -translate-x-1/2 my-2 text-center bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 placeholder-gray-400;
+}
+
+.dropdown-filter--select > option {
+  @apply w-full break-normal md:w-1/4 md:break-all;
 }
 
 .posts-container {
